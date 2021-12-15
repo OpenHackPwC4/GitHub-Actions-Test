@@ -33,17 +33,3 @@ jobs:
         run: dotnet build --no-restore .
       - name: Test
         run: dotnet test --no-build --verbosity normal ./tests/UnitTests
-
----
-name: poi-ci
-
-on:
-  pull_request:
-    branches: [main]
-    paths-ignore:
-      - "apis/poi/**"
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - run: 'echo "No build required" '
