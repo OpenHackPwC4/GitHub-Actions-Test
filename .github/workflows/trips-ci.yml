@@ -29,7 +29,9 @@ jobs:
       run: |-
         go mod download github.com/codemodus/swagui
         go get github.com/Azure-Samples/openhack-devops-team/apis/trips/tripsgo
-    - name: Run the server
-      run: go run main.go
+    - name: Build
+      run: go build main.go
+    # - name: Run the server
+    #   run: go run main.go
     - name: Test
       run: go test ./tripgo -run Unit
