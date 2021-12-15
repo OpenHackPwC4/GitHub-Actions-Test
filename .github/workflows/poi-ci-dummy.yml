@@ -1,0 +1,13 @@
+name: poi-ci
+
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - "apis/poi/**"
+jobs:
+  build:
+    name: poi-ci-job
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No build required" '
