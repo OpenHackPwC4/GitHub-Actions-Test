@@ -3,33 +3,47 @@ name: poi-ci
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-    - 'apis/poi/**'
+      - "apis/poi/**"
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
-    - 'apis/poi/**'
+      - "apis/poi/**"
 
 defaults:
   run:
     shell: bash
     working-directory: apis/poi/
-    
+
 jobs:
   build:
     name: poi-ci-job
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore .
-    - name: Test
-      run: dotnet test --no-build --verbosity normal ./tests/UnitTests
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore .
+      - name: Test
+        run: dotnet test --no-build --verbosity normal ./tests/UnitTests
+
+---
+name: poi-ci
+
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - "apis/poi/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No build required" '
